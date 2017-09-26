@@ -3,12 +3,13 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 import { receiveDecks, addDeck } from '../actions'
-import { createDeck, getDecks } from '../utils/api'
+import { createDeck, createCard, getDecks } from '../utils/api'
 
 class DeckList extends React.Component {
   constructor(props) {
     super(props);
     this.addDeck = this.addDeck.bind(this);
+    this.addCard = this.addCard.bind(this);
   }
 
   componentWillMount() {
@@ -21,7 +22,13 @@ class DeckList extends React.Component {
     console.log("adding deck")
     let tempDeck = {id: "12234", name: "test", cards: []}
     createDeck(decks.decks, tempDeck).then((decks) => dispatch(receiveDecks(decks)))
-    //dispatch(addDeck(tempDeck))
+  }
+
+  addCard() {
+    const { dispatch, decks } = this.props
+    console.log("adding card")
+    let tempCard = {id: "abcde", front: "front part", back: "back part"}
+    createCard(decks.decks, "12234", tempCard).then((decks) => dispatch(receiveDecks(decks)))
   }
 
   render() {
@@ -37,6 +44,12 @@ class DeckList extends React.Component {
         <Button
           onPress={this.addDeck}
           title="Add deck"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
+        <Button
+          onPress={this.addCard}
+          title="Add card"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
