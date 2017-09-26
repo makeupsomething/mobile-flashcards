@@ -1,13 +1,20 @@
-import { RECEIVE_DECKS } from '../actions'
+import {
+  RECEIVE_DECKS,
+  ADD_DECK,
+  ADD_CARD,
+} from '../actions'
 
 function decks (state = {}, action) {
-  console.log("reducer")
-  console.log(action.decks)
   switch (action.type) {
     case RECEIVE_DECKS :
       return {
         ...state,
         decks: action.decks,
+      }
+    case ADD_DECK :
+      return {
+        ...state,
+        decks: [...state.decks, action.deck],
       }
     default :
       return state
