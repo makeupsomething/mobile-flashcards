@@ -8,7 +8,7 @@ export function getDecks() {
 }
 
 export function createDeck(decks, newDeck) {
-  decks.push(deckID)
+  decks.push(newDeck)
   AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then(formatDeckResults)

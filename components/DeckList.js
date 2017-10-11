@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 import { receiveDecks, addDeck } from '../actions'
 import { createDeck, createCard, getDecks } from '../utils/api'
+import CreateDeckModal from './CreateDeckModal'
 
-class DeckList extends React.Component {
+class DeckList extends Component {
   constructor(props) {
     super(props);
     this.addDeck = this.addDeck.bind(this);
     this.addCard = this.addCard.bind(this);
-  }
+  };
 
   componentWillMount() {
     const { dispatch } = this.props
@@ -31,6 +32,14 @@ class DeckList extends React.Component {
     createCard(decks.decks, "12234", tempCard).then((decks) => dispatch(receiveDecks(decks)))
   }
 
+  addDeckTest(deckName) {
+    const { dispatch, decks } = this.props
+    console.log("Adding Deck")
+    let id = Math.floor(Math.random() * 90000) + 10000;
+    let tempDeck = {id: id, name: deckName, cards: []}
+    createDeck(decks.decks, tempDeck).then((decks) => dispatch(receiveDecks(decks)))
+  }
+
   render() {
     const { decks } = this.props
     let allDecks = decks.decks
@@ -38,9 +47,6 @@ class DeckList extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
         <Button
           onPress={this.addDeck}
           title="Add deck"
@@ -52,6 +58,11 @@ class DeckList extends React.Component {
           title="Add card"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
+        />
+        <CreateDeckModal
+          addDeckTest={(deckName) => {
+            this.addDeckTest(deckName);
+          }}
         />
       </View>
     );
