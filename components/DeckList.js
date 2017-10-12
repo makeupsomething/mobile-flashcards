@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 class DeckList extends Component {
   constructor(props) {
     super(props);
-    this.addDeck = this.addDeck.bind(this);
+    this.addDeckTest = this.addDeckTest.bind(this);
     this.addCard = this.addCard.bind(this);
   }
 
@@ -30,13 +30,6 @@ class DeckList extends Component {
   componentWillMount() {
     const { dispatch } = this.props;
     getDecks().then(decks => dispatch(receiveDecks(decks)));
-  }
-
-  addDeck() {
-    const { dispatch, decks } = this.props;
-    console.log("adding deck");
-    const tempDeck = { id: '12234', name: 'test', cards: [] }
-    createDeck(decks.decks, tempDeck).then(decks => dispatch(receiveDecks(decks)));
   }
 
   addCard() {
@@ -68,7 +61,10 @@ class DeckList extends Component {
         {allDecks.map(deck => (
           <View key={deck.id}>
             <Button
-              onPress={() => navigate('DeckDetails')}
+              onPress={() => navigate(
+                'DeckDetails',
+                {deck: deck}
+              )}
               title={deck.name}
             />
           </View>

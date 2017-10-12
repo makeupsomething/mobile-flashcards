@@ -6,7 +6,8 @@ class CreateCardModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'Deck Name',
+      question: 'question',
+      answer: 'answer',
       modalVisible: false,
     };
   }
@@ -17,7 +18,7 @@ class CreateCardModal extends Component {
 
   render() {
     const {
-      addDeckTest,
+      addCardTest,
     } = this.props;
 
     return (
@@ -32,14 +33,19 @@ class CreateCardModal extends Component {
           <View>
             <TextInput
               style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={(text) => this.setState({text})}
-              value={this.state.text}
+              onChangeText={(text) => this.setState({question: text})}
+              value={this.state.question}
+            />
+            <TextInput
+              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+              onChangeText={(text) => this.setState({answer: text})}
+              value={this.state.answer}
             />
 
             <TouchableHighlight onPress={() => {
-              addDeckTest(this.state.text)
+              addCardTest(this.state.question, this.state.answer)
             }}>
-              <Text>Add Deck</Text>
+              <Text>Add Card</Text>
             </TouchableHighlight>
 
             <TouchableHighlight onPress={() => {
