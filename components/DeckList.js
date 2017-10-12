@@ -1,35 +1,49 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { createStore } from 'redux'
-import { Provider, connect } from 'react-redux'
-import { receiveDecks, addDeck } from '../actions'
-import { createDeck, createCard, getDecks } from '../utils/api'
-import CreateDeckModal from './CreateDeckModal'
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import { receiveDecks, addDeck } from '../actions';
+import { createDeck, createCard, getDecks } from '../utils/api';
+import CreateDeckModal from './CreateDeckModal';
+import Deck from './Deck';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 class DeckList extends Component {
   constructor(props) {
     super(props);
     this.addDeck = this.addDeck.bind(this);
     this.addCard = this.addCard.bind(this);
+  }
+
+  static navigationOptions = {
+    title: 'Hello',
   };
 
   componentWillMount() {
-    const { dispatch } = this.props
-    getDecks().then((decks) => dispatch(receiveDecks(decks)))
+    const { dispatch } = this.props;
+    getDecks().then(decks => dispatch(receiveDecks(decks)));
   }
 
   addDeck() {
-    const { dispatch, decks } = this.props
-    console.log("adding deck")
-    let tempDeck = {id: "12234", name: "test", cards: []}
-    createDeck(decks.decks, tempDeck).then((decks) => dispatch(receiveDecks(decks)))
+    const { dispatch, decks } = this.props;
+    console.log("adding deck");
+    const tempDeck = { id: '12234', name: 'test', cards: [] }
+    createDeck(decks.decks, tempDeck).then(decks => dispatch(receiveDecks(decks)));
   }
 
   addCard() {
-    const { dispatch, decks } = this.props
-    console.log("adding card")
-    let tempCard = {id: "abcde", front: "front part", back: "back part"}
-    createCard(decks.decks, "12234", tempCard).then((decks) => dispatch(receiveDecks(decks)))
+    const { dispatch, decks } = this.props;
+    console.log("adding card");
+    const tempCard = { id: "abcde", front: "front part", back: "back part" };
+    createCard(decks.decks, "12234", tempCard).then(decks => dispatch(receiveDecks(decks)))
   }
 
   addDeckTest(deckName) {
@@ -42,11 +56,23 @@ class DeckList extends Component {
 
   render() {
     const { decks } = this.props
-    let allDecks = decks.decks
-    console.log(allDecks)
+    const { navigate } = this.props.navigation;
+
+    let allDecks = [];
+    if(decks.decks){
+      allDecks = decks.decks;
+    }
 
     return (
       <View style={styles.container}>
+        {allDecks.map(deck => (
+          <View key={deck.id}>
+            <Button
+              onPress={() => navigate('DeckDetails')}
+              title={deck.name}
+            />
+          </View>
+        ))}
         <Button
           onPress={this.addDeck}
           title="Add deck"
@@ -69,21 +95,10 @@ class DeckList extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-function mapStateToProps (decks) {
+function mapStateToProps(decks) {
   return {
-    decks
-  }
+    decks,
+  };
 }
 
-export default connect(
-  mapStateToProps,
-)(DeckList)
+export default connect(mapStateToProps)(DeckList);

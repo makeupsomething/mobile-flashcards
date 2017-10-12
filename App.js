@@ -7,14 +7,25 @@ import { purple, white } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import DeckList from './components/DeckList'
+import Deck from './components/Deck';
+import { StackNavigator } from 'react-navigation'
 
+
+const ModalStack = StackNavigator({
+  DeckList: {
+      screen: DeckList
+  },
+  DeckDetails: {
+    screen: Deck,
+  },
+});
 
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
         <View style={{flex: 1}}>
-          <DeckList />
+          <ModalStack />
         </View>
       </Provider>
     )
