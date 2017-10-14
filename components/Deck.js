@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Provider, connect } from 'react-redux';
-import { View, Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
 import CreateCardModal from './CreateCardModal';
 import { createDeck, createCard, getDecks } from '../utils/api';
 import { receiveDecks, addDeck } from '../actions';
@@ -25,6 +25,8 @@ class Deck extends Component {
 
   render() {
     const { deck } = this.props
+    const { navigate } = this.props.navigation;
+
     console.log("looking at deck")
     console.log(deck)
     return (
@@ -34,6 +36,13 @@ class Deck extends Component {
           addCardTest={(question, answer) => {
             this.addCardTest(question, answer);
           }}
+        />
+        <Button
+          onPress={() => navigate(
+            'QuizView',
+            {deck: deck}
+          )}
+          title="Start Quiz"
         />
       </View>
     )

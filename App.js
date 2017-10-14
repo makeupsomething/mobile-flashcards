@@ -8,6 +8,8 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck';
+import Quiz from './components/Quiz';
+import Results from './components/Results';
 import { StackNavigator } from 'react-navigation'
 
 
@@ -17,6 +19,12 @@ const ModalStack = StackNavigator({
   },
   DeckDetails: {
     screen: Deck,
+  },
+  QuizView: {
+    screen: Quiz,
+  },
+  ResultsView: {
+    screen: Results,
   },
 });
 

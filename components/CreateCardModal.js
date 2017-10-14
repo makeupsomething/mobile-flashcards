@@ -51,7 +51,7 @@ class CreateCardModal extends Component {
             <TouchableHighlight onPress={() => {
               this.setModalVisible(!this.state.modalVisible)
             }}>
-              <Text>Hide Modal</Text>
+              <Text>Close</Text>
             </TouchableHighlight>
           </View>
          </View>
@@ -59,7 +59,7 @@ class CreateCardModal extends Component {
         <TouchableHighlight onPress={() => {
           this.setModalVisible(true)
         }}>
-          <Text>Show Modal</Text>
+          <Text>Add Card</Text>
         </TouchableHighlight>
 
       </View>

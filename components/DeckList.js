@@ -69,18 +69,6 @@ class DeckList extends Component {
             />
           </View>
         ))}
-        <Button
-          onPress={this.addDeck}
-          title="Add deck"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
-        <Button
-          onPress={this.addCard}
-          title="Add card"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
         <CreateDeckModal
           addDeckTest={(deckName) => {
             this.addDeckTest(deckName);

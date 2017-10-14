@@ -45,7 +45,7 @@ class CreateDeckModal extends Component {
             <TouchableHighlight onPress={() => {
               this.setModalVisible(!this.state.modalVisible)
             }}>
-              <Text>Hide Modal</Text>
+              <Text>Close</Text>
             </TouchableHighlight>
           </View>
          </View>
@@ -53,7 +53,7 @@ class CreateDeckModal extends Component {
         <TouchableHighlight onPress={() => {
           this.setModalVisible(true)
         }}>
-          <Text>Show Modal</Text>
+          <Text>Add Deck</Text>
         </TouchableHighlight>
 
       </View>
