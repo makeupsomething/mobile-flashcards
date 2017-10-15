@@ -15,7 +15,7 @@ import { StackNavigator } from 'react-navigation'
 
 const ModalStack = StackNavigator({
   DeckList: {
-      screen: DeckList
+    screen: DeckList
   },
   DeckDetails: {
     screen: Deck,

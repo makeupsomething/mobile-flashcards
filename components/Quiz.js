@@ -10,11 +10,19 @@ class Quiz extends Component {
     super(props);
     this.flipCard = this.flipCard.bind(this);
     this.answerQuestion = this.answerQuestion.bind(this);
+    this.restartQuiz = this.restartQuiz.bind(this);
     this.state = {
       currentQuestion: 0,
       cardSide: 'front',
       correctCount: 0,
     };
+  }
+
+  restartQuiz() {
+    console.log("restart quiz")
+    this.setState({correctCount: 0})
+    this.setState({currentQuestion: 0})
+    this.setState({cardSide: 'back'})
   }
 
   flipCard() {
@@ -47,7 +55,15 @@ class Quiz extends Component {
       })
     } else {
       console.log("quiz over")
-      navigate('ResultsView', {deck: deck})
+      this.setState({correctCount: 0})
+      this.setState({currentQuestion: 0})
+      this.setState({cardSide: 'front'})
+      console.log("go to results")
+      console.log(deck)
+      navigate(
+        'ResultsView',
+        {deck: deck}
+      )
     }
   }
 
@@ -90,9 +106,6 @@ class Quiz extends Component {
                 accessibilityLabel="Flip Card"
               />
     }
-    console.log("doing quiz of deck")
-    console.log(this.state.currentQuestion)
-    console.log(deck)
     return (
       <View>
         <Text>Quiz!</Text>
