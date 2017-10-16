@@ -38,6 +38,7 @@ class CreateDeckModal extends Component {
 
             <TouchableHighlight onPress={() => {
               addDeckTest(this.state.text)
+              this.setModalVisible(!this.state.modalVisible)
             }}>
               <Text>Add Deck</Text>
             </TouchableHighlight>

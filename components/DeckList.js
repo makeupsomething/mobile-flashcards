@@ -21,6 +21,7 @@ class DeckList extends Component {
     super(props);
     this.addDeckTest = this.addDeckTest.bind(this);
     this.addCard = this.addCard.bind(this);
+    this.routeToNewDeck = this.routeToNewDeck.bind(this);
   }
 
   static navigationOptions = {
@@ -44,7 +45,19 @@ class DeckList extends Component {
     console.log("Adding Deck")
     let id = Math.floor(Math.random() * 90000) + 10000;
     let tempDeck = {id: id, name: deckName, cards: []}
-    createDeck(decks.decks, tempDeck).then((decks) => dispatch(receiveDecks(decks)))
+    createDeck(decks.decks, tempDeck).then((decks) => dispatch(receiveDecks(decks))).then(this.routeToNewDeck(id))
+  }
+
+  routeToNewDeck(newID) {
+    const { decks } = this.props
+    const { navigate } = this.props.navigation;
+    console.log("route to the new deck with id")
+    console.log(newID)
+    newDeck = decks.decks.filter(deck => (deck.id === newID))
+    navigate(
+      'DeckDetails',
+      {deck: newDeck}
+    )
   }
 
   render() {
@@ -65,7 +78,7 @@ class DeckList extends Component {
                 'DeckDetails',
                 {deck: deck}
               )}
-              title={deck.name}
+              title={deck.name+deck.cards.length}
             />
           </View>
         ))}
