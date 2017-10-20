@@ -1,0 +1,61 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/0.27.5_1/libexec/bin/yarn.js cache clean
+
+PATH: 
+  /anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
+
+Yarn version: 
+  0.27.5
+
+Node version: 
+  6.9.2
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "mobile-flashcards",
+    "version": "0.1.0",
+    "private": true,
+    "devDependencies": {
+      "babel-eslint": "^8.0.1",
+      "eslint-config-airbnb": "^16.0.0",
+      "eslint-plugin-react": "^7.4.0",
+      "jest-expo": "~20.0.0",
+      "react-native-scripts": "1.3.1",
+      "react-test-renderer": "16.0.0-alpha.12"
+    },
+    "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+    "scripts": {
+      "start": "react-native-scripts start",
+      "eject": "react-native-scripts eject",
+      "android": "react-native-scripts android",
+      "ios": "react-native-scripts ios",
+      "test": "node node_modules/jest/bin/jest.js --watch"
+    },
+    "jest": {
+      "preset": "jest-expo"
+    },
+    "dependencies": {
+      "babel-eslint": "^8.0.1",
+      "eslint": "^4.8.0",
+      "expo": "^20.0.0",
+      "react": "16.0.0-alpha.12",
+      "react-native": "^0.47.0",
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  SyntaxError: /Users/daryl/Documents/mobile-flashcards/package.json: Unexpected token } in JSON at position 845
+      at Object.parse (native)
+      at /usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:747:57
+      at next (native)
+      at step (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:91:30)
+      at /usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:102:13

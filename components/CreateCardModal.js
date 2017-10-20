@@ -44,6 +44,7 @@ class CreateCardModal extends Component {
 
             <TouchableHighlight onPress={() => {
               addCardTest(this.state.question, this.state.answer)
+              this.setModalVisible(!this.state.modalVisible)
             }}>
               <Text>Add Card</Text>
             </TouchableHighlight>

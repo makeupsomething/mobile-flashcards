@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import { View, Text, Button } from 'react-native';
+import {
+  clearLocalNotification,
+  setLocalNotification,
+} from '../utils/helpers';
 
 class Results extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   static navigationOptions = ({ navigation }) => {
-    const { deck } = navigation.state.params
+    const { deck } = navigation.state.params;
   }
 
   render() {
-    const { deck } = this.props
-    console.log("results view innit")
-    console.log(deck)
-    const { navigate } = this.props.navigation
+    const { deck } = this.props;
+    console.log("results view innit");
+    console.log(deck);
+    const { navigate } = this.props.navigation;
+
+    clearLocalNotification()
+      .then(setLocalNotification);
 
     return (
       <View>
@@ -23,7 +27,7 @@ class Results extends Component {
         <Button
           onPress={() => navigate(
             'QuizView',
-            {deck: deck}
+            { deck: deck },
           )}
           title="Try Again"
           color="#839484"
@@ -32,7 +36,7 @@ class Results extends Component {
         <Button
           onPress={() => navigate(
             'DeckList',
-            {deck: deck}
+            { deck: deck },
           )}
           title="Deck List"
           color="#839484"
@@ -43,12 +47,12 @@ class Results extends Component {
   }
 }
 
-function mapStateToProps (decks, { navigation }) {
-  const { deck } = navigation.state.params
+function mapStateToProps(decks, { navigation }) {
+  const { deck } = navigation.state.params;
 
   return {
     deck,
-  }
+  };
 }
 
 export default connect(mapStateToProps)(Results);
