@@ -22,8 +22,8 @@ export function clearLocalNotification() {
 
 function createNotification() {
   return {
-    title: 'Log your stats!',
-    body: "👋 don't forget to log your stats for today!",
+    title: 'Quiz Time!',
+    body: "consistency is key! try to do a quiz every day!",
     ios: {
       sound: true,
     },
@@ -41,15 +41,18 @@ export function setLocalNotification() {
     .then(JSON.parse)
     .then((data) => {
       if (data === null) {
+        console.log("set notifications")
         Permissions.askAsync(Permissions.NOTIFICATIONS)
           .then(({ status }) => {
+            console.log(status)
+            console.log(data)
             if (status === 'granted') {
               Notifications.cancelAllScheduledNotificationsAsync();
 
               const tomorrow = new Date();
               tomorrow.setDate(tomorrow.getDate() + 1);
-              tomorrow.setHours(20);
-              tomorrow.setMintutes(0);
+              tomorrow.setHours(17);
+              tomorrow.setMinutes(30);
 
               Notifications.scheduleLocalNotificationAsync(
                 createNotification(),

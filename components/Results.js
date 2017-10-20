@@ -19,7 +19,7 @@ class Results extends Component {
     const { navigate } = this.props.navigation;
 
     clearLocalNotification()
-      .then(setLocalNotification);
+      .then(setLocalNotification());
 
     return (
       <View>
