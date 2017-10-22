@@ -32,6 +32,8 @@ class Deck extends Component {
     return (
       <View>
         <Text>Deck Details</Text>
+        <Text>{deck.name}</Text>
+        <Text>{deck.cards.length}</Text>
         <CreateCardModal
           addCardTest={(question, answer) => {
             this.addCardTest(question, answer);
@@ -49,8 +51,9 @@ class Deck extends Component {
   }
 }
 
-function mapStateToProps (decks, { navigation }) {
+function mapStateToProps (state, { navigation }) {
   const { deck } = navigation.state.params
+  const { decks } = state;
 
   return {
     decks,

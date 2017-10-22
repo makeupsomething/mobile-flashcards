@@ -68,12 +68,12 @@ class CreateCardModal extends Component {
   }
 }
 
-function mapStateToProps (decks) {
+function mapStateToProps(state) {
+  const { decks, score } = state;
   return {
-    decks
-  }
+    decks,
+    score,
+  };
 }
 
-export default connect(
-  mapStateToProps,
-)(CreateCardModal)
+export default connect(mapStateToProps)(CreateCardModal);
