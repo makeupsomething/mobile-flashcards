@@ -13,9 +13,11 @@ class Results extends Component {
   }
 
   render() {
-    const { deck } = this.props;
+    const { deck, score } = this.props;
     console.log("results view innit");
     console.log(deck);
+    console.log("******score******");
+    console.log(score.score)
     const { navigate } = this.props.navigation;
 
     clearLocalNotification()
@@ -24,6 +26,7 @@ class Results extends Component {
     return (
       <View>
         <Text>Quiz over</Text>
+        <Text>Your score was {score.score} / {deck.cards.length}</Text>
         <Button
           onPress={() => navigate(
             'QuizView',
@@ -47,11 +50,13 @@ class Results extends Component {
   }
 }
 
-function mapStateToProps(decks, { navigation }) {
-  const { deck } = navigation.state.params;
-
+function mapStateToProps(state, { navigation }) {
+  const { deck } = navigation.state.params
+  const { decks, score } = state;
   return {
     deck,
+    decks,
+    score,
   };
 }
 

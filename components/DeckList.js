@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { receiveDecks, addDeck } from '../actions';
@@ -61,9 +61,8 @@ class DeckList extends Component {
   }
 
   render() {
-    const { decks } = this.props
+    const { decks, score } = this.props
     const { navigate } = this.props.navigation;
-
     let allDecks = [];
     if(decks.decks){
       allDecks = decks.decks;
@@ -71,30 +70,34 @@ class DeckList extends Component {
 
     return (
       <View style={styles.container}>
-        {allDecks.map(deck => (
-          <View key={deck.id}>
-            <Button
-              onPress={() => navigate(
-                'DeckDetails',
-                {deck: deck}
-              )}
-              title={deck.name+deck.cards.length}
-            />
-          </View>
-        ))}
-        <CreateDeckModal
-          addDeckTest={(deckName) => {
-            this.addDeckTest(deckName);
-          }}
-        />
+        <ScrollView>
+          {allDecks.map(deck => (
+            <View key={deck.id}>
+              <Button
+                onPress={() => navigate(
+                  'DeckDetails',
+                  {deck: deck}
+                )}
+                title={deck.name+deck.cards.length}
+              />
+            </View>
+          ))}
+          <CreateDeckModal
+            addDeckTest={(deckName) => {
+              this.addDeckTest(deckName);
+            }}
+          />
+        </ScrollView>
       </View>
     );
   }
 }
 
-function mapStateToProps(decks) {
+function mapStateToProps(state) {
+  const { decks, score } = state;
   return {
     decks,
+    score,
   };
 }
 

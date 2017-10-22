@@ -3,7 +3,7 @@ import { Provider, connect } from 'react-redux';
 import { View, Text, Button } from 'react-native';
 import Question from './Question';
 import { createDeck, createCard, getDecks } from '../utils/api';
-import { receiveDecks, addDeck } from '../actions';
+import { receiveDecks, addDeck, setScore } from '../actions';
 
 class Quiz extends Component {
   constructor(props) {
@@ -14,8 +14,12 @@ class Quiz extends Component {
     this.state = {
       currentQuestion: 0,
       cardSide: 'front',
-      correctCount: 0,
     };
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(setScore(0))
   }
 
   restartQuiz() {
@@ -35,16 +39,22 @@ class Quiz extends Component {
   }
 
   answerQuestion(isCorrect){
-    const { deck } = this.props
+    const { dispatch, deck, score } = this.props
     const { navigate } = this.props.navigation;
 
     console.log("answering question")
     console.log(this.state.currentQuestion)
     console.log(deck.cards.length)
+    let currentScore = score.score
     if(isCorrect){
-      this.setState({
-        correctCount: this.state.correctCount + 1
-      })
+      console.log("####score before####")
+      console.log(currentScore)
+      console.log("####score before####")
+      currentScore = currentScore + 1
+      console.log("####score####")
+      console.log(currentScore)
+      dispatch(setScore(currentScore))
+      console.log("####score####")
     }
     if(this.state.currentQuestion + 1 < deck.cards.length ) {
       this.setState({
@@ -55,7 +65,6 @@ class Quiz extends Component {
       })
     } else {
       console.log("quiz over")
-      this.setState({correctCount: 0})
       this.setState({currentQuestion: 0})
       this.setState({cardSide: 'front'})
       console.log("go to results")
@@ -72,8 +81,9 @@ class Quiz extends Component {
   }
 
   render() {
-    const { deck } = this.props
-
+    const { deck, score } = this.props
+    console.log("start.....")
+    console.log(score.score)
     function ButtonGroup(props) {
       const { flipCard, answerQuestion, side } = props;
       console.log("current question")
@@ -127,11 +137,13 @@ class Quiz extends Component {
   }
 }
 
-function mapStateToProps (decks, { navigation }) {
+function mapStateToProps (state, { navigation }) {
   const { deck } = navigation.state.params
+  const { score } = state;
 
   return {
     deck,
+    score,
   }
 }
 
