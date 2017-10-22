@@ -6,8 +6,6 @@ export const ADD_CARD = 'ADD_CARD'
 export const ADD_SCORE = 'ADD_SCORE'
 
 export function receiveDecks (decks) {
-  console.log("actions")
-  console.log(decks)
   return {
     type: RECEIVE_DECKS,
     decks,

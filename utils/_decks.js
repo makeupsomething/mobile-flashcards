@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 
-export const DECKS_STORAGE_KEY = 'Decks:oop'
+export const DECKS_STORAGE_KEY = 'Decks:mmm'
 
 function setInitialDeck () {
   var deck = [];

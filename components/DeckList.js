@@ -32,19 +32,6 @@ const styles = StyleSheet.create({
       height: 3
     },
   },
-  noDataText: {
-    fontSize: 20,
-    paddingTop: 20,
-    paddingBottom: 20
-  },
-  iosSubmitBtn: {
-    backgroundColor: purple,
-    padding: 10,
-    borderRadius: 7,
-    height: 45,
-    marginLeft: 40,
-    marginRight: 40,
-  },
 })
 
 
@@ -83,8 +70,6 @@ class DeckList extends Component {
   routeToNewDeck(newID) {
     const { decks } = this.props
     const { navigate } = this.props.navigation;
-    console.log("route to the new deck with id")
-    console.log(newID)
     newDeck = decks.decks.filter(deck => (deck.id === newID))
     navigate(
       'DeckDetails',
@@ -102,6 +87,11 @@ class DeckList extends Component {
 
     return (
       <View style={styles.container}>
+        <CreateDeckModal
+          addDeckTest={(deckName) => {
+            this.addDeckTest(deckName);
+          }}
+        />
         <ScrollView>
           {allDecks.map(deck => (
             <View key={deck.id} style={styles.item}>
@@ -112,15 +102,10 @@ class DeckList extends Component {
                   'DeckDetails',
                   {deck: deck}
                 )}
-                title="Do this quiz!"
+                title="More Details"
               />
             </View>
           ))}
-          <CreateDeckModal
-            addDeckTest={(deckName) => {
-              this.addDeckTest(deckName);
-            }}
-          />
         </ScrollView>
       </View>
     );

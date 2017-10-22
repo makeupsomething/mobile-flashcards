@@ -1,10 +1,36 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet, Platform } from 'react-native';
 import {
   clearLocalNotification,
   setLocalNotification,
 } from '../utils/helpers';
+import { white, purple } from '../utils/colors'
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  item: {
+    backgroundColor: white,
+    borderRadius: Platform.OS === 'ios' ? 16 : 2,
+    padding: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 50,
+    justifyContent: 'center',
+    shadowRadius: 3,
+    shadowOpacity: 0.7,
+    shadowColor: 'rgba(0, 0, 0, 0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+  },
+})
 
 class Results extends Component {
 
@@ -24,7 +50,7 @@ class Results extends Component {
       .then(setLocalNotification());
 
     return (
-      <View>
+      <View style={styles.item}>
         <Text>Quiz over</Text>
         <Text>Your score was {score.score} / {deck.cards.length}</Text>
         <Button

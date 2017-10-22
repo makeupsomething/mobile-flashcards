@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  item: {
+    alignSelf: 'center',
+  },
+})
 
 class Question extends Component {
   render() {
@@ -9,9 +15,9 @@ class Question extends Component {
       const { question, side } = props;
       console.log(question)
       if (side === 'back') {
-        return <Text>{question.back}</Text>;
+        return <Text style={styles.item}>{question.back}</Text>;
       }
-      return <Text>{question.front}</Text>;
+      return <Text style={styles.item}>{question.front}</Text>;
     }
 
     return (

@@ -7,20 +7,14 @@ import { receiveDecks, addDeck, setScore } from '../actions';
 import { white, purple, red, green } from '../utils/colors'
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   item: {
     backgroundColor: white,
     borderRadius: Platform.OS === 'ios' ? 16 : 2,
-    padding: 100,
+    padding: 10,
     marginLeft: 5,
     marginRight: 5,
     marginTop: 10,
-    height: 20,
+    height: 150,
     justifyContent: 'center',
     shadowRadius: 3,
     shadowOpacity: 0.7,
@@ -29,14 +23,6 @@ const styles = StyleSheet.create({
       width: 0,
       height: 3
     },
-  },
-  iosSubmitBtn: {
-    backgroundColor: purple,
-    padding: 10,
-    borderRadius: 7,
-    height: 45,
-    marginLeft: 40,
-    marginRight: 40,
   },
 })
 
@@ -109,24 +95,27 @@ class Quiz extends Component {
       if (side == 'back') {
         return  <View>
                   <Button
-                    style={styles.iosSubmitBtn}
                     onPress={flipCard}
                     title="Flip Card"
                     color="#839484"
                     accessibilityLabel="Flip Card"
                   />
-                  <Button
-                    onPress={() => answerQuestion(true)}
-                    title="Correct"
-                    color="#839484"
-                    accessibilityLabel="Correct"
-                  />
-                  <Button
-                    onPress={() => answerQuestion(false)}
-                    title="Wrong"
-                    color="#839484"
-                    accessibilityLabel="Correct"
-                  />
+                  <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center',}}>
+                    <Button
+                      style={{marginLeft: 5, width: 50, height: 50, backgroundColor: 'powderblue'}}
+                      onPress={() => answerQuestion(true)}
+                      title="Correct"
+                      color="#839484"
+                      accessibilityLabel="Correct"
+                    />
+                    <Button
+                      style={{marginRight: 5, width: 50, height: 50, backgroundColor: 'powderblue'}}
+                      onPress={() => answerQuestion(false)}
+                      title="Wrong"
+                      color="#839484"
+                      accessibilityLabel="Correct"
+                    />
+                  </View>
                 </View>
       }
       return <Button
@@ -138,6 +127,7 @@ class Quiz extends Component {
     }
     return (
       <View style={styles.item}>
+        <Text>Question {this.state.currentQuestion+1}/{deck.cards.length}</Text>
         <Question
           question={deck.cards[this.state.currentQuestion]}
           side={this.state.cardSide}
