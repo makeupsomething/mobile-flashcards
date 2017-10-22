@@ -40,10 +40,6 @@ class Results extends Component {
 
   render() {
     const { deck, score } = this.props;
-    console.log("results view innit");
-    console.log(deck);
-    console.log("******score******");
-    console.log(score.score)
     const { navigate } = this.props.navigation;
 
     clearLocalNotification()

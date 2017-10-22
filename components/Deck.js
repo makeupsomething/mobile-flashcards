@@ -56,10 +56,7 @@ class Deck extends Component {
   render() {
     const { deck } = this.props
     const { navigate } = this.props.navigation;
-
-    if(deck.cards) {
-      console.log("array is empty")
-    }
+    
     return (
       <View style={styles.container}>
         <View style={styles.item}>

@@ -9,7 +9,6 @@ function setInitialDeck () {
 }
 
 export function formatDeckResults (results) {
-  console.log(results)
   return results === null
     ? setInitialDeck()
     : JSON.parse(results)

@@ -16,15 +16,13 @@ export function createDeck(decks, newDeck) {
 
 export function createCard(decks, deck, deckID, newCard) {
   var d = decks.find(deck => deck.id === deckID);
-  console.log("creating card")
-  console.log(decks);
-  console.log(deck);
   if(typeof(deck.cards) !== 'undefined'){
     deck.cards.push(newCard)
   } else {
-    deck.cards = new Array(newCard)
+    deck.cards = [newCard]
   }
   AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    .then(formatDeckResults)
+      .then(formatDeckResults)
+
 }

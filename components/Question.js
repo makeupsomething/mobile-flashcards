@@ -13,7 +13,6 @@ class Question extends Component {
 
     function QuestionText(props) {
       const { question, side } = props;
-      console.log(question)
       if (side === 'back') {
         return <Text style={styles.item}>{question.back}</Text>;
       }

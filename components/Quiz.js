@@ -44,14 +44,12 @@ class Quiz extends Component {
   }
 
   restartQuiz() {
-    console.log("restart quiz")
     this.setState({correctCount: 0})
     this.setState({currentQuestion: 0})
     this.setState({cardSide: 'back'})
   }
 
   flipCard() {
-    console.log("flipCard")
     if(this.state.cardSide == 'front'){
       this.setState({cardSide: 'back'})
     } else {

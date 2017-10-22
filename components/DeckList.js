@@ -52,16 +52,20 @@ class DeckList extends Component {
     getDecks().then(decks => dispatch(receiveDecks(decks)));
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    console.log("mount")
+    getDecks().then(decks => dispatch(receiveDecks(decks)));
+  }
+
   addCard() {
     const { dispatch, decks } = this.props;
-    console.log("adding card");
     const tempCard = { id: "abcde", front: "front part", back: "back part" };
     createCard(decks.decks, "12234", tempCard).then(decks => dispatch(receiveDecks(decks)))
   }
 
   addDeckTest(deckName) {
     const { dispatch, decks } = this.props
-    console.log("Adding Deck")
     let id = Math.floor(Math.random() * 90000) + 10000;
     let tempDeck = {id: id, name: deckName, cards: new Array()}
     createDeck(decks.decks, tempDeck).then((decks) => dispatch(receiveDecks(decks))).then(this.routeToNewDeck(id))
