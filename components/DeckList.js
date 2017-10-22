@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, Platform } from 'react-native';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { receiveDecks, addDeck } from '../actions';
 import { createDeck, createCard, getDecks } from '../utils/api';
 import CreateDeckModal from './CreateDeckModal';
 import Deck from './Deck';
+import { white, purple } from '../utils/colors'
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +15,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+  item: {
+    backgroundColor: white,
+    borderRadius: Platform.OS === 'ios' ? 16 : 2,
+    padding: 100,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
+    height: 20,
+    justifyContent: 'center',
+    shadowRadius: 3,
+    shadowOpacity: 0.7,
+    shadowColor: 'rgba(0, 0, 0, 0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+  },
+  noDataText: {
+    fontSize: 20,
+    paddingTop: 20,
+    paddingBottom: 20
+  },
+  iosSubmitBtn: {
+    backgroundColor: purple,
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40,
+  },
+})
+
 
 class DeckList extends Component {
   constructor(props) {
@@ -25,7 +57,7 @@ class DeckList extends Component {
   }
 
   static navigationOptions = {
-    title: 'Hello',
+    title: 'Deck List',
   };
 
   componentWillMount() {
@@ -44,7 +76,7 @@ class DeckList extends Component {
     const { dispatch, decks } = this.props
     console.log("Adding Deck")
     let id = Math.floor(Math.random() * 90000) + 10000;
-    let tempDeck = {id: id, name: deckName, cards: []}
+    let tempDeck = {id: id, name: deckName, cards: new Array()}
     createDeck(decks.decks, tempDeck).then((decks) => dispatch(receiveDecks(decks))).then(this.routeToNewDeck(id))
   }
 
@@ -72,13 +104,15 @@ class DeckList extends Component {
       <View style={styles.container}>
         <ScrollView>
           {allDecks.map(deck => (
-            <View key={deck.id}>
+            <View key={deck.id} style={styles.item}>
+              <Text>{deck.name}</Text>
+              <Text>Cards: {deck.cards.length}</Text>
               <Button
                 onPress={() => navigate(
                   'DeckDetails',
                   {deck: deck}
                 )}
-                title={deck.name+deck.cards.length}
+                title="Do this quiz!"
               />
             </View>
           ))}

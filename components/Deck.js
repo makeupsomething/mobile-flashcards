@@ -29,11 +29,18 @@ class Deck extends Component {
 
     console.log("looking at deck")
     console.log(deck)
+    if(deck.cards) {
+      console.log("array is empty")
+    }
     return (
       <View>
         <Text>Deck Details</Text>
-        <Text>{deck.name}</Text>
-        <Text>{deck.cards.length}</Text>
+        <Text>Title: {deck.name}</Text>
+        {typeof deck.cards !== 'undefined' ? (
+          <Text>Cards: {deck.cards.length}</Text>
+        ) : (
+          <Text>No cards</Text>
+        )}
         <CreateCardModal
           addCardTest={(question, answer) => {
             this.addCardTest(question, answer);
