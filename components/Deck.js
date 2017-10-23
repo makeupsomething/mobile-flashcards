@@ -39,46 +39,43 @@ const styles = StyleSheet.create({
 class Deck extends Component {
   constructor(props) {
     super(props);
-    this.addCardTest = this.addCardTest.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    console.log("mount")
+    //getDecks().then(decks => dispatch(receiveDecks(decks)));
   }
 
   static navigationOptions = ({ navigation }) => {
     const { deck } = navigation.state.params
   }
 
-  addCardTest(question, answer) {
-    const { dispatch, decks, deck } = this.props
-    let id = Math.floor(Math.random() * 90000) + 10000;
-    const tempCard = { id: id, front: question, back: answer };
-    createCard(decks.decks, deck, deck.id, tempCard).then(decks => dispatch(receiveDecks(decks)))
-  }
-
   render() {
-    const { deck } = this.props
+    const { deck, decks } = this.props
     const { navigate } = this.props.navigation;
-    
+    const currentDeck = decks.decks.find(d => d.id === deck.id);
+    console.log(currentDeck)
     return (
       <View style={styles.container}>
         <View style={styles.item}>
           <Text>Deck Details</Text>
-          <Text>Title: {deck.name}</Text>
-          {typeof deck.cards !== 'undefined' ? (
-            <Text>Cards: {deck.cards.length}</Text>
+          <Text>Title: {currentDeck.name}</Text>
+          {typeof currentDeck.cards !== 'undefined' ? (
+            <Text>Cards: {currentDeck.cards.length}</Text>
           ) : (
             <Text>No cards</Text>
           )}
           <Button
             onPress={() => navigate(
               'QuizView',
-              {deck: deck}
+              {deck: currentDeck}
             )}
             title="Start Quiz"
           />
         </View>
         <CreateCardModal
-          addCardTest={(question, answer) => {
-            this.addCardTest(question, answer);
-          }}
+          deck={currentDeck}
         />
       </View>
     )

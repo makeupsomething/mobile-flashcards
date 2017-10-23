@@ -74,7 +74,10 @@ class DeckList extends Component {
   routeToNewDeck(newID) {
     const { decks } = this.props
     const { navigate } = this.props.navigation;
-    newDeck = decks.decks.filter(deck => (deck.id === newID))
+    newDeck = decks.decks.find(deck => (deck.id === newID))
+    console.log("####### routing to deck ##########")
+    console.log(newDeck)
+    console.log("####### routing to deck ##########")
     navigate(
       'DeckDetails',
       {deck: newDeck}

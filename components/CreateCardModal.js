@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Modal, Text, TouchableHighlight, View, TextInput, StyleSheet } from 'react-native';
 import { Provider, connect } from 'react-redux'
 import { white, gray } from '../utils/colors'
+import { createDeck, createCard, getDecks } from '../utils/api';
+import { receiveDecks, addDeck } from '../actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
 class CreateCardModal extends Component {
   constructor(props) {
     super(props);
+    this.addCardTest = this.addCardTest.bind(this);
     this.state = {
       question: 'question',
       answer: 'answer',
@@ -43,14 +46,26 @@ class CreateCardModal extends Component {
     };
   }
 
+  addCardTest(question, answer) {
+    const { dispatch, decks, deck } = this.props
+    console.log("ADD CARD TO DECK")
+    console.log(deck)
+    console.log("########")
+    let id = Math.floor(Math.random() * 90000) + 10000;
+    const tempCard = { id: id, front: question, back: answer };
+    console.log("########ADDING CARD TO############")
+    console.log(deck.id)
+    console.log("########ADDING CARD TO############")
+    createCard(decks.decks, deck, deck.id, tempCard)
+    .then(decks => dispatch(receiveDecks(decks)))
+    this.setModalVisible(!this.state.modalVisible)
+  }
+
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
 
   render() {
-    const {
-      addCardTest,
-    } = this.props;
 
     return (
       <View style={{marginTop: 22}}>
@@ -74,8 +89,7 @@ class CreateCardModal extends Component {
             />
             <View  style={{flex: 1, flexDirection: 'row', justifyContent: 'center',}}>
               <TouchableHighlight style={styles.iosSubmitBtn} onPress={() => {
-                addCardTest(this.state.question, this.state.answer)
-                this.setModalVisible(!this.state.modalVisible)
+                this.addCardTest(this.state.question, this.state.answer)
               }}>
                 <Text>Add Card</Text>
               </TouchableHighlight>
