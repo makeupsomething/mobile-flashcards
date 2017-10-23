@@ -124,21 +124,29 @@ class Quiz extends Component {
               />
     }
     return (
-      <View style={styles.item}>
-        <Text>Question {this.state.currentQuestion+1}/{deck.cards.length}</Text>
-        <Question
-          question={deck.cards[this.state.currentQuestion]}
-          side={this.state.cardSide}
-        />
-        <ButtonGroup
-          side={this.state.cardSide}
-          flipCard={() => {
-            this.flipCard();
-          }}
-          answerQuestion={(isCorrect) => {
-            this.answerQuestion(isCorrect);
-          }}
-        />
+      <View>
+        {deck.cards.length > 0 ? (
+          <View style={styles.item}>
+            <Text>Question {this.state.currentQuestion+1}/{deck.cards.length}</Text>
+            <Question
+              question={deck.cards[this.state.currentQuestion]}
+              side={this.state.cardSide}
+            />
+            <ButtonGroup
+              side={this.state.cardSide}
+              flipCard={() => {
+                this.flipCard();
+              }}
+              answerQuestion={(isCorrect) => {
+                this.answerQuestion(isCorrect);
+              }}
+            />
+          </View>
+        ) : (
+          <View>
+            <Text>No cards</Text>
+          </View>
+        )}
       </View>
     )
   }
