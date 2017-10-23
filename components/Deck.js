@@ -41,12 +41,6 @@ class Deck extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    const { dispatch } = this.props;
-    console.log("mount")
-    //getDecks().then(decks => dispatch(receiveDecks(decks)));
-  }
-
   static navigationOptions = ({ navigation }) => {
     const { deck } = navigation.state.params
   }
@@ -55,7 +49,6 @@ class Deck extends Component {
     const { deck, decks } = this.props
     const { navigate } = this.props.navigation;
     const currentDeck = decks.decks.find(d => d.id === deck.id);
-    console.log(currentDeck)
     return (
       <View style={styles.container}>
         <View style={styles.item}>

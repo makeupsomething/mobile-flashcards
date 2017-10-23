@@ -16,13 +16,9 @@ export function createDeck(decks, newDeck) {
 
 export function createCard(decks, deck, deckID, newCard) {
   const d = decks.find(deck => deck.id === deckID);
-  console.log(deckID)
-  console.log(d)
   if(typeof(d.cards) !== 'undefined'){
-    console.log("push card")
     d.cards.push(newCard)
   } else {
-    console.log("create array")
     d.cards = [newCard]
   }
   AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))

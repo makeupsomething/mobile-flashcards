@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Text, TouchableHighlight, View, TextInput, StyleSheet } from 'react-native';
-import { Provider, connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { white, gray } from '../utils/colors'
 
 const styles = StyleSheet.create({
@@ -47,9 +47,7 @@ class CreateDeckModal extends Component {
   }
 
   render() {
-    const {
-      addDeckTest,
-    } = this.props;
+    const {addDeck} = this.props;
 
     return (
       <View style={{marginTop: 22}}>
@@ -68,7 +66,7 @@ class CreateDeckModal extends Component {
             />
             <View  style={{flex: 1, flexDirection: 'row', justifyContent: 'center',}}>
               <TouchableHighlight  style={styles.iosSubmitBtn} onPress={() => {
-                addDeckTest(this.state.text)
+                addDeck(this.state.text)
                 this.setModalVisible(!this.state.modalVisible)
               }}>
                 <Text>Add Deck</Text>

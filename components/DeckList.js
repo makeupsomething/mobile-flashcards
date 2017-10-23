@@ -38,8 +38,7 @@ const styles = StyleSheet.create({
 class DeckList extends Component {
   constructor(props) {
     super(props);
-    this.addDeckTest = this.addDeckTest.bind(this);
-    this.addCard = this.addCard.bind(this);
+    this.addDeck = this.addDeck.bind(this);
     this.routeToNewDeck = this.routeToNewDeck.bind(this);
   }
 
@@ -54,17 +53,10 @@ class DeckList extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    console.log("mount")
     getDecks().then(decks => dispatch(receiveDecks(decks)));
   }
 
-  addCard() {
-    const { dispatch, decks } = this.props;
-    const tempCard = { id: "abcde", front: "front part", back: "back part" };
-    createCard(decks.decks, "12234", tempCard).then(decks => dispatch(receiveDecks(decks)))
-  }
-
-  addDeckTest(deckName) {
+  addDeck(deckName) {
     const { dispatch, decks } = this.props
     let id = Math.floor(Math.random() * 90000) + 10000;
     let tempDeck = {id: id, name: deckName, cards: new Array()}
@@ -75,9 +67,6 @@ class DeckList extends Component {
     const { decks } = this.props
     const { navigate } = this.props.navigation;
     newDeck = decks.decks.find(deck => (deck.id === newID))
-    console.log("####### routing to deck ##########")
-    console.log(newDeck)
-    console.log("####### routing to deck ##########")
     navigate(
       'DeckDetails',
       {deck: newDeck}
@@ -95,8 +84,8 @@ class DeckList extends Component {
     return (
       <View style={styles.container}>
         <CreateDeckModal
-          addDeckTest={(deckName) => {
-            this.addDeckTest(deckName);
+          addDeck={(deckName) => {
+            this.addDeck(deckName);
           }}
         />
         <ScrollView>
